@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() => runApp(const MyApp());
@@ -31,21 +30,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _addressController = TextEditingController(text: '127.0.0.1');
-  TextEditingController _portController = TextEditingController(text: '8080');
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _addressController = TextEditingController(text: '127.0.0.1');
+  final TextEditingController _portController = TextEditingController(text: '8080');
+  final TextEditingController _controller = TextEditingController();
   WebSocketChannel? _channel;
-  static var output_log='output_log';
-  //final __channel = WebSocketChannel.connect(
-    //Uri.parse('ws://localhost:8080'),
-  //);
-
-  @override
-  void initState() {
-    super.initState();
-    _connect(); // Initialize _channel with default address and port
-    _disconnect(); // Initialize _channel with default address and port
-  }
+  static String outputLog = 'output_log';
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             TextField(
               controller: _addressController,
-              decoration: InputDecoration(labelText: 'Address'),
+              decoration: const InputDecoration(labelText: 'Address'),
             ),
             TextField(
               controller: _portController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Port'),
+              decoration: const InputDecoration(labelText: 'Port'),
             ),
             Form(
               child: TextFormField(
@@ -77,8 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
             StreamBuilder(
               stream: _channel?.stream,
               builder: (context, snapshot) {
+                //return Text('hoge');
                 return Text(snapshot.hasData ? '${snapshot.data}' : '');
               },
+            ),
+            const Padding(
+              padding: EdgeInsets.all(10),
             ),
             Row(
               children: [
@@ -86,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async{
                     _connect();
                   },
-                  child: Text('Connect'),
+                  child: const Text('Connect'),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(10),
@@ -95,13 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async{
                     _disconnect();
                   },
-                  child: Text('Disconnect'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text(output_log),
+                  child: const Text('Disconnect'),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(outputLog),
             ),
           ],
         ),
@@ -127,17 +120,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   void _disconnect()  {
     setState(() {
-      output_log = "disconnect";
+      outputLog = "disconnect";
       });
     if (_channel != null) {
-      _channel!.sink.close();
-      _channel = null;
+      //_channel!.sink.close();
+      //_channel = null;
     }
   }
   void _sendMessage() {
-    if (_controller.text.isNotEmpty) {
-      _channel?.sink.add(_controller.text);
-    }
+    setState(() {
+      if (_controller.text.isNotEmpty) {
+        _channel?.sink.add(_controller.text);
+      }
+    });
   }
 
   @override
