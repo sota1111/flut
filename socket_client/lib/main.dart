@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:async/async.dart';
+import 'dart:convert' show utf8;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() => runApp(const MyApp());
@@ -77,9 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ElevatedButton(
                   onPressed: () async{
-                    _connect();
+                    _connectAndSend();
                   },
-                  child: const Text('Connect'),
+                  child: const Text('connectAndSend'),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(10),
@@ -107,13 +111,45 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Future<void> _connectAndSend() async {
+    // サーバーのIPアドレスとポート番号を設定
+    final serverAddress = InternetAddress(_addressController.text);
+    final serverPort = int.parse(_portController.text);
+    final message = 'Hello, Server!';
+
+    try {
+      // サーバーに接続する
+      final socket = await Socket.connect(
+          serverAddress, serverPort, timeout: Duration(seconds: 5));
+
+      // メッセージを送信する
+      socket.write(message);
+
+      // サーバーからのデータを受信する
+      final List<int> data = [];
+      await for (var chunk in socket) {
+        data.addAll(chunk);
+      }
+
+      // 受信したデータをUTF8でデコードする
+      final response = utf8.decode(data);
+      utf8.decode(data);
+      debugPrint('Received response: $response');
+
+      // ソケットを閉じる
+      await socket.close();
+    } catch (e) {
+      debugPrint('Error: $e');
+    }
+  }
+
   void _connect() async {
     String address = _addressController.text;
     int port = int.parse(_portController.text);
     setState(() {
       if (_channel == null) {
         setState(() {
-          _channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
+          //_channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
         });
         outputLog = "connected";
       }
