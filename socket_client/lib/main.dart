@@ -30,11 +30,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _addressController = TextEditingController(text: '127.0.0.1');
-  final TextEditingController _portController = TextEditingController(text: '8080');
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _addressController = TextEditingController(text: '192.168.42.100');
+  final TextEditingController _portController = TextEditingController(text: '55001');
+  final TextEditingController _controller = TextEditingController(text: '%GetUnitInfo\$');
   WebSocketChannel? _channel;
-  static String outputLog = 'output_log';
+  static String outputLog = "not connect";
 
   @override
   Widget build(BuildContext context) {
@@ -110,21 +110,22 @@ class _MyHomePageState extends State<MyHomePage> {
   void _connect() async {
     String address = _addressController.text;
     int port = int.parse(_portController.text);
-
-    if (_channel != null) {
-      _channel!.sink.close();
-    }
-    //_channel = WebSocketChannel.connect(Uri.parse('ws://localhost:8080'));
-    _channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
-    //_channel = IOWebSocketChannel.connect('ws://$address:$port');
+    setState(() {
+      if (_channel == null) {
+        setState(() {
+          _channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
+        });
+        outputLog = "connected";
+      }
+    });
   }
   void _disconnect()  {
     setState(() {
-      outputLog = "disconnect";
-      });
+      outputLog = "disconnected";
+    });
     if (_channel != null) {
-      //_channel!.sink.close();
-      //_channel = null;
+      _channel!.sink.close();
+      _channel = null;
     }
   }
   void _sendMessage() {
