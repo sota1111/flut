@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:async';
-import 'package:async/async.dart';
 import 'dart:convert' show utf8;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -37,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _addressController = TextEditingController(text: '192.168.42.100');
   final TextEditingController _portController = TextEditingController(text: '55001');
   final TextEditingController _controller = TextEditingController(text: '%GetUnitInfo\$');
-  WebSocketChannel? _channel;
+  Socket? socket;
   static String outputLog = "not connect";
 
   @override
@@ -65,14 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 controller: _controller,
                 decoration: const InputDecoration(labelText: 'Send a message'),
               ),
-            ),
-            const SizedBox(height: 24),
-            StreamBuilder(
-              stream: _channel?.stream,
-              builder: (context, snapshot) {
-                //return Text('hoge');
-                return Text(snapshot.hasData ? '${snapshot.data}' : '');
-              },
             ),
             const Padding(
               padding: EdgeInsets.all(10),
@@ -115,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // サーバーのIPアドレスとポート番号を設定
     final serverAddress = InternetAddress(_addressController.text);
     final serverPort = int.parse(_portController.text);
-    final message = 'Hello, Server!';
+    final message = _controller.text;
 
     try {
       // サーバーに接続する
@@ -147,34 +138,32 @@ class _MyHomePageState extends State<MyHomePage> {
     String address = _addressController.text;
     int port = int.parse(_portController.text);
     setState(() {
-      if (_channel == null) {
-        setState(() {
           //_channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
-        });
         outputLog = "connected";
-      }
     });
   }
-  void _disconnect()  {
+  Future<void> _disconnect() async {
     setState(() {
       outputLog = "disconnected";
     });
-    if (_channel != null) {
-      _channel!.sink.close();
-      _channel = null;
+      if (socket != null) {
+        await socket!.close();
+        debugPrint('Socket closed.');
+      } else {
+        debugPrint('No socket to close.');
+      }
     }
-  }
   void _sendMessage() {
     setState(() {
       if (_controller.text.isNotEmpty) {
-        _channel?.sink.add(_controller.text);
+        //_channel?.sink.add(_controller.text);
       }
     });
   }
 
   @override
   void dispose() {
-    _channel?.sink.close();
+    //_channel?.sink.close();
     _addressController.dispose();
     _portController.dispose();
     _controller.dispose();
