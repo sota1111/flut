@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _addressController = TextEditingController(text: '192.168.42.100');
   final TextEditingController _portController = TextEditingController(text: '55001');
-  final TextEditingController _controller = TextEditingController(text: '%GetUnitInfo\$');
+  final TextEditingController _sendMessage = TextEditingController(text: '%GetUnitInfo\$');
   Socket? socket;
   static String outputLog = "not connect";
 
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Form(
               child: TextFormField(
-                controller: _controller,
+                controller: _sendMessage,
                 decoration: const InputDecoration(labelText: 'Send a message'),
               ),
             ),
@@ -72,16 +72,16 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ElevatedButton(
                   onPressed: () async{
-                    _connectAndSend();
+                    _funcConnect();
                   },
-                  child: const Text('connectAndSend'),
+                  child: const Text('Connect'),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(10),
                 ),
                 ElevatedButton(
                   onPressed: () async{
-                    _disconnect();
+                    _funcDisconnect();
                   },
                   child: const Text('Disconnect'),
                 ),
@@ -95,69 +95,63 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _sendMessage,
+        onPressed: _funcSendMessage,
         tooltip: 'Send message',
         child: const Icon(Icons.send),
       ),
     );
   }
 
-  Future<void> _connectAndSend() async {
+  Future<void> _funcConnect() async {
     // サーバーのIPアドレスとポート番号を設定
     final serverAddress = InternetAddress(_addressController.text);
     final serverPort = int.parse(_portController.text);
-    final message = _controller.text;
+    final message = _sendMessage.text;
 
     try {
       // サーバーに接続する
-      final socket = await Socket.connect(
-          serverAddress, serverPort, timeout: Duration(seconds: 5));
-
-      // メッセージを送信する
-      socket.write(message);
-
-      // サーバーからのデータを受信する
-      final List<int> data = [];
-      await for (var chunk in socket) {
-        data.addAll(chunk);
-      }
-
-      // 受信したデータをUTF8でデコードする
-      final response = utf8.decode(data);
-      utf8.decode(data);
-      debugPrint('Received response: $response');
-
-      // ソケットを閉じる
-      await socket.close();
+      socket = await Socket.connect(serverAddress, serverPort, timeout: const Duration(seconds: 5));
+      setState(() {
+        outputLog = "connected";
+      });
     } catch (e) {
       debugPrint('Error: $e');
     }
   }
 
-  void _connect() async {
-    String address = _addressController.text;
-    int port = int.parse(_portController.text);
-    setState(() {
-          //_channel = WebSocketChannel.connect(Uri.parse('ws://$address:$port'));
-        outputLog = "connected";
-    });
-  }
-  Future<void> _disconnect() async {
-    setState(() {
-      outputLog = "disconnected";
-    });
-      if (socket != null) {
-        await socket!.close();
-        debugPrint('Socket closed.');
-      } else {
-        debugPrint('No socket to close.');
-      }
+  Future<void> _funcDisconnect() async {
+    if (socket != null) {
+      await socket!.close();
+      setState(() {
+        outputLog = "Socket closed";
+      });
+      debugPrint("Socket closed.");
+    } else {
+      setState(() {
+        outputLog = "No socket to close.";
+      });
+      debugPrint('No socket to close.');
     }
-  void _sendMessage() {
+  }
+  void _funcSendMessage() async {
+    if (socket == null) {
+      debugPrint('Socket is not connected.');
+      return;
+    }
+
+    // メッセージを送信する
+    socket!.write(_sendMessage.text);
     setState(() {
-      if (_controller.text.isNotEmpty) {
-        //_channel?.sink.add(_controller.text);
-      }
+      outputLog = "sent message";
+    });
+
+    // サーバーからのデータを非同期で受信する
+    socket!.listen((List<int> data) {
+      final response = utf8.decode(data);
+      debugPrint('Received response: $response');
+      setState(() {
+        outputLog = "res:$response";
+      });
     });
   }
 
@@ -166,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //_channel?.sink.close();
     _addressController.dispose();
     _portController.dispose();
-    _controller.dispose();
+    _sendMessage.dispose();
     super.dispose();
   }
 }
