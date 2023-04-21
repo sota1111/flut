@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,96 +9,144 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: Color(0xFF222222),
         appBar: null,
-        body: Column(
+        body: MyHomePage(),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color(0xFF222222),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Business',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 60.0, 60.0, 0.0),
+      ),
+      Container(
+        color: Color(0xFF222222),
+        child: Text(
+          'Welcome PiiMo',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
+      ),
+      Container(
+        color: Color(0xFF222222),
+        padding: EdgeInsets.fromLTRB(8, 16, 8, 16), // 外側の余白を設定
+        child: Text(
+          'Operation Board',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40,
+          ),
+          textAlign: TextAlign.right, // テキストを右寄せに設定
+        ),
+      ),
+      Divider(
+        color: Colors.grey,
+        thickness: 3,
+      ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
+      ),
+      Container(
+        width: 550, // 例: 幅を100に設定
+        height: 200, // 例: 高さを100に設定
+        decoration: BoxDecoration(
+          color: Colors.grey, // 背景色を灰色に設定
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.black), // 枠の色を黒に設定
+        ),
+
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(60.0, 60.0, 60.0, 0.0),
+            InkWell(
+              onTap: () {},
               child: Container(
-                padding: EdgeInsets.all(16.0),
-                color: Colors.white,
-                child: Text(
-                  'Upper Message Area',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                width: 190,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Color(0xFF000099),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.directions_car,
+                    color: Colors.white,
+                    size: 50,
+                  ),
                 ),
               ),
             ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 1.2,
-                children: List.generate(4, (index) {
-                  return Card(
-                    color: Color(0xFF000099),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.directions_car,
-                            size: 64.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: RotatedBox(
-                              quarterTurns: 1,
-                              child: CupertinoSwitch(
-                                value: false,
-                                onChanged: (bool value) {},
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              color: Colors.white,
-              child: Text(
-                'Lower Message Area',
-                style: TextStyle(fontSize: 20, color: Colors.black),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: 190,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Color(0xFF009900), // 2つ目のInkWellの色を変更
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.directions_car,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          color: Color(0xFF222222),
-          height: 60.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.search, color: Colors.white),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.settings, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
+      ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
+      ),
+
+      Container(
+        color: Color(0xFF222222),
+        child: Text(
+          'Message',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
           ),
         ),
       ),
-    );
+
+
+
+
+
+
+    ]);
   }
 }
