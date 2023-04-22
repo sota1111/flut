@@ -34,5 +34,4 @@ class TextStyles {
     color: Colors.white70,
     //fontWeight: FontWeight.bold,
   );
-
 }

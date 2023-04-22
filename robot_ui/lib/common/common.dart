@@ -1,6 +1,3 @@
-
-
-
 enum Mode {
   neutral,
   manual,
@@ -8,7 +5,3 @@ enum Mode {
   parent,
   follow,
 }
-
-
-
-

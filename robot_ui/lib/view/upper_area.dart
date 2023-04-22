@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../common/text_styles.dart';
 
+import '../common/common_imports.dart';
 
 class UpperArea extends StatelessWidget {
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class boxDecorationStyles {
-
   static const Color colorBackGround = Color(0xFF262626);
 
   static final BoxDecoration boxDecoration = BoxDecoration(
@@ -23,5 +22,4 @@ class boxDecorationStyles {
   static const double heightMultiBox = 210;
   static const double heightParentBox = 150;
   static const double heightFollowBox = 150;
-
 }

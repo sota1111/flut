@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../common/text_styles.dart';
-import '../common/container_styles.dart';
+
+import '../common/common_imports.dart';
 
 class MessageArea extends StatelessWidget {
   @override
@@ -24,13 +24,16 @@ class MessageArea extends StatelessWidget {
       ),
       Container(
         padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
-        width: screenSize.width * 1.0, // 例: 幅を100に設定
-        height: 150, //
+        width: screenSize.width * 1.0,
+        // 例: 幅を100に設定
+        height: 150,
+        //
         decoration: BoxDecoration(
           color: boxDecorationStyles.colorBackGround,
           border: Border.all(color: Colors.white24, width: 1), // 枠線の色と幅を設定
         ),
-        alignment: Alignment.topLeft, // テキストを左寄せに設定
+        alignment: Alignment.topLeft,
+        // テキストを左寄せに設定
         child: Text(
           'Select Mobility Mode',
           style: TextStyles.message,
@@ -39,4 +42,3 @@ class MessageArea extends StatelessWidget {
     ]);
   }
 }
-

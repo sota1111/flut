@@ -19,7 +19,8 @@ BottomNavigationBar buildBottomNavigationBar() {
       ),
     ],
     unselectedItemColor: Colors.white,
-    selectedLabelStyle: TextStyle(fontSize: 12), // 選択されたラベルのフォントサイズを設定
+    selectedLabelStyle: TextStyle(fontSize: 12),
+    // 選択されたラベルのフォントサイズを設定
     unselectedLabelStyle: TextStyle(fontSize: 12),
   );
 }

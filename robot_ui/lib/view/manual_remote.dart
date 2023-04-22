@@ -2,12 +2,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common/common.dart';
-import '../common/text_styles.dart';
-import '../common/container_styles.dart';
-import '../common/custom_image.dart';
-import 'view_provider.dart';
 
+import '../common/common_imports.dart';
+import 'view_provider.dart';
 
 class ManualRemote extends ConsumerWidget {
   @override
@@ -46,7 +43,8 @@ class ManualRemote extends ConsumerWidget {
                     _changeColor(Mode.manual);
                   },
                   child: Container(
-                    width: screenSize.width * boxDecorationStyles.ratioManualBox,
+                    width:
+                        screenSize.width * boxDecorationStyles.ratioManualBox,
                     height: boxDecorationStyles.heightManualBox,
                     decoration: BoxDecoration(
                       color: _colorManual,
@@ -58,7 +56,10 @@ class ManualRemote extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: CustomImage(imagePath: _colorManual == colorOff ? 'assets/A.png' : 'assets/B.png'),
+                          child: CustomImage(
+                              imagePath: _colorManual == colorOff
+                                  ? 'assets/A.png'
+                                  : 'assets/B.png'),
                         ),
                         Positioned(
                           top: 5,
@@ -81,7 +82,8 @@ class ManualRemote extends ConsumerWidget {
                     _changeColor(Mode.remote);
                   },
                   child: Container(
-                    width: screenSize.width * boxDecorationStyles.ratioRemoteBox,
+                    width:
+                        screenSize.width * boxDecorationStyles.ratioRemoteBox,
                     height: boxDecorationStyles.heightRemoteBox,
                     decoration: BoxDecoration(
                       color: _colorRemote,
@@ -93,9 +95,11 @@ class ManualRemote extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: CustomImage(imagePath: _colorRemote == colorOff ? 'assets/A.png' : 'assets/B.png'),
+                          child: CustomImage(
+                              imagePath: _colorRemote == colorOff
+                                  ? 'assets/A.png'
+                                  : 'assets/B.png'),
                         ),
-
                         Positioned(
                           top: 5,
                           left: 10,

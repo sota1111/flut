@@ -1,11 +1,9 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common/common.dart';
+
+import '../common/common_imports.dart';
 
 final modeProvider = StateNotifierProvider<ModeNotifier, Mode>(
-        (ref) => ModeNotifier(Mode.neutral));
+    (ref) => ModeNotifier(Mode.neutral));
 
 class ModeNotifier extends StateNotifier<Mode> {
   ModeNotifier(Mode state) : super(state);

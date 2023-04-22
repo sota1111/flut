@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common/common.dart';
-import '../common/text_styles.dart';
-import '../common/container_styles.dart';
-import '../common/custom_image.dart';
+
+import '../common/common_imports.dart';
 import 'view_provider.dart';
 
 class ParentFollow extends ConsumerWidget {
@@ -45,7 +43,8 @@ class ParentFollow extends ConsumerWidget {
                     _changeColor(Mode.parent);
                   },
                   child: Container(
-                    width: screenSize.width * boxDecorationStyles.ratioParentBox,
+                    width:
+                        screenSize.width * boxDecorationStyles.ratioParentBox,
                     height: boxDecorationStyles.heightParentBox,
                     decoration: BoxDecoration(
                       color: _colorParent,
@@ -57,7 +56,10 @@ class ParentFollow extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: CustomImage(imagePath: _colorParent == colorOff ? 'assets/A.png' : 'assets/B.png'),
+                          child: CustomImage(
+                              imagePath: _colorParent == colorOff
+                                  ? 'assets/A.png'
+                                  : 'assets/B.png'),
                         ),
                         Positioned(
                           top: 5,
@@ -80,7 +82,8 @@ class ParentFollow extends ConsumerWidget {
                     _changeColor(Mode.follow);
                   },
                   child: Container(
-                    width: screenSize.width * boxDecorationStyles.ratioFollowBox,
+                    width:
+                        screenSize.width * boxDecorationStyles.ratioFollowBox,
                     height: boxDecorationStyles.heightFollowBox,
                     decoration: BoxDecoration(
                       color: _colorFollow,
@@ -94,10 +97,16 @@ class ParentFollow extends ConsumerWidget {
                         Row(
                           children: [
                             Center(
-                              child: CustomImage(imagePath: _colorFollow == colorOff ? 'assets/A.png' : 'assets/B.png'),
+                              child: CustomImage(
+                                  imagePath: _colorFollow == colorOff
+                                      ? 'assets/A.png'
+                                      : 'assets/B.png'),
                             ),
                             Center(
-                              child: CustomImage(imagePath: _colorFollow == colorOff ? 'assets/A.png' : 'assets/B.png'),
+                              child: CustomImage(
+                                  imagePath: _colorFollow == colorOff
+                                      ? 'assets/A.png'
+                                      : 'assets/B.png'),
                             ),
                           ],
                         ),
