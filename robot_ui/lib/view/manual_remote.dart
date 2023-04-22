@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/common.dart';
 import '../common/text_styles.dart';
 import '../common/container_styles.dart';
+import '../common/custom_image.dart';
 import 'view_provider.dart';
 
 
@@ -57,11 +58,7 @@ class ManualRemote extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: Icon(
-                            Icons.directions_car,
-                            color: Colors.black87,
-                            size: 100,
-                          ),
+                          child: CustomImage(imagePath: _colorManual == colorOff ? 'assets/A.png' : 'assets/B.png'),
                         ),
                         Positioned(
                           top: 5,
@@ -96,12 +93,9 @@ class ManualRemote extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: Icon(
-                            Icons.directions_car_filled_outlined,
-                            color: Colors.black87,
-                            size: 100,
-                          ),
+                          child: CustomImage(imagePath: _colorRemote == colorOff ? 'assets/A.png' : 'assets/B.png'),
                         ),
+
                         Positioned(
                           top: 5,
                           left: 10,

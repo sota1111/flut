@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/common.dart';
 import '../common/text_styles.dart';
 import '../common/container_styles.dart';
+import '../common/custom_image.dart';
 import 'view_provider.dart';
 
 class ParentFollow extends ConsumerWidget {
@@ -32,7 +33,7 @@ class ParentFollow extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'FOLLOW MODE',
+                'MULTI MODE',
                 style: TextStyles.modeTitle,
               ),
             ),
@@ -56,11 +57,7 @@ class ParentFollow extends ConsumerWidget {
                     child: Stack(
                       children: [
                         Center(
-                          child: Icon(
-                            Icons.directions_car,
-                            color: Colors.black87,
-                            size: 100,
-                          ),
+                          child: CustomImage(imagePath: _colorParent == colorOff ? 'assets/A.png' : 'assets/B.png'),
                         ),
                         Positioned(
                           top: 5,
@@ -97,18 +94,10 @@ class ParentFollow extends ConsumerWidget {
                         Row(
                           children: [
                             Center(
-                              child: Icon(
-                                Icons.directions_car_filled_outlined,
-                                color: Colors.black87,
-                                size: 100,
-                              ),
+                              child: CustomImage(imagePath: _colorFollow == colorOff ? 'assets/A.png' : 'assets/B.png'),
                             ),
                             Center(
-                              child: Icon(
-                                Icons.directions_car_filled_outlined,
-                                color: Colors.black87,
-                                size: 100,
-                              ),
+                              child: CustomImage(imagePath: _colorFollow == colorOff ? 'assets/A.png' : 'assets/B.png'),
                             ),
                           ],
                         ),
