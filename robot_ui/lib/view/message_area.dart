@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../common.dart';
 
 class MessageArea extends StatelessWidget {
   @override
@@ -14,10 +15,7 @@ class MessageArea extends StatelessWidget {
         alignment: Alignment.centerLeft, // テキストを左寄せに設定
         child: Text(
           'MESSAGE AREA',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize:20,
-          ),
+          style: TextStyles.messageTitle,
         ),
       ),
       Padding(
@@ -34,10 +32,7 @@ class MessageArea extends StatelessWidget {
         alignment: Alignment.topLeft, // テキストを左寄せに設定
         child: Text(
           'Select Mobility Mode',
-          style: TextStyle(
-            color: Colors.white70,
-            fontSize: 15,
-          ),
+          style: TextStyles.message,
         ),
       ),
     ]);

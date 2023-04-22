@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../common.dart';
 
 
 class UpperArea extends StatelessWidget {
@@ -15,10 +16,7 @@ class UpperArea extends StatelessWidget {
           color: Color(0xFF222222),
           child: Text(
             'welcome piimo',
-            style: TextStyle(
-              color: Colors.white38,
-              fontSize: 20,
-            ),
+            style: TextStyles.welcomeMessage,
           ),
         ),
         Container(
@@ -26,11 +24,7 @@ class UpperArea extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(8, 10, 0, 0), // 外側の余白を設定
           child: Text(
             'CONTROL SYSTEM',
-            style: TextStyle(
-              color: Color(0xFFEEEEEE),
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyles.title,
             textAlign: TextAlign.right, // テキストを右寄せに設定
           ),
         ),

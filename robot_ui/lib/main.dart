@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'upper_area.dart';
-import 'manual_remote.dart';
-import 'parent_follow.dart';
-import 'message_area.dart';
-import 'bottom_navi.dart';
+import 'view/upper_area.dart';
+import 'view/manual_remote.dart';
+import 'view/parent_follow.dart';
+import 'view/message_area.dart';
+import 'view/bottom_navi.dart';
 
 void main() {
   runApp(

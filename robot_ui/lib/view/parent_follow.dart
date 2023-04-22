@@ -2,19 +2,18 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'common.dart';
+import '../common.dart';
 import 'view_provider.dart';
 
-
-class ManualRemote extends ConsumerWidget {
+class ParentFollow extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Size screenSize = MediaQuery.of(context).size;
     Mode modeState = ref.watch(modeProvider);
-    Color colorOn = const Color(0xFF222222);
-    Color colorOff = const Color(0xFFDDDDDD);
-    Color _colorManual = modeState == Mode.manual ? colorOn : colorOff;
-    Color _colorRemote = modeState == Mode.remote ? colorOn : colorOff;
+    Color colorOn = TextStyles.subtitleColorOn;
+    Color colorOff = TextStyles.subtitleColorOff;
+    Color _colorParent = modeState == Mode.parent ? colorOn : colorOff;
+    Color _colorFollow = modeState == Mode.follow ? colorOn : colorOff;
 
     void _changeColor(Mode modeClicked) {
       ref.read(modeProvider.notifier).changeMode(modeClicked);
@@ -35,8 +34,8 @@ class ManualRemote extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'SOLO MODE',
-                style: TextStyle(fontSize: 16, color: Colors.white70),
+                'FOLLOW MODE',
+                style: TextStyles.modeTitle,
               ),
             ),
             Row(
@@ -44,16 +43,16 @@ class ManualRemote extends ConsumerWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    _changeColor(Mode.manual);
+                    _changeColor(Mode.parent);
                   },
                   child: Container(
-                    width: screenSize.width * 0.4,
+                    width: screenSize.width * 0.3,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: _colorManual,
+                      color: _colorParent,
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                          color: _colorManual == colorOn ? colorOff : colorOn,
+                          color: _colorParent == colorOn ? colorOff : colorOn,
                           width: 2),
                     ),
                     child: Stack(
@@ -69,10 +68,10 @@ class ManualRemote extends ConsumerWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            'MANUAL MODE',
+                            'PARENT MODE',
                             style: TextStyle(
-                                fontSize: 13,
-                                color: _colorManual == colorOn
+                                fontSize: TextStyles.subtitleFontSize,
+                                color: _colorParent == colorOn
                                     ? colorOff
                                     : colorOn),
                           ),
@@ -83,36 +82,47 @@ class ManualRemote extends ConsumerWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    _changeColor(Mode.remote);
+                    _changeColor(Mode.follow);
                   },
                   child: Container(
-                    width: screenSize.width * 0.4,
+                    width: screenSize.width * 0.5,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: _colorRemote,
+                      color: _colorFollow,
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(
-                          color: _colorRemote == colorOn ? colorOff : colorOn,
+                          color: _colorFollow == colorOn ? colorOff : colorOn,
                           width: 2),
                     ),
                     child: Stack(
                       children: [
-                        Center(
-                          child: Icon(
-                            Icons.directions_car_filled_outlined,
-                            color: Colors.black87,
-                            size: 100,
-                          ),
+                        Row(
+                          children: [
+                            Center(
+                              child: Icon(
+                                Icons.directions_car_filled_outlined,
+                                color: Colors.black87,
+                                size: 100,
+                              ),
+                            ),
+                            Center(
+                              child: Icon(
+                                Icons.directions_car_filled_outlined,
+                                color: Colors.black87,
+                                size: 100,
+                              ),
+                            ),
+                          ],
                         ),
                         Positioned(
                           top: 5,
                           left: 10,
                           child: Text(
-                            'REMOTE MODE',
+                            'FOLLOW MODE',
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: TextStyles.subtitleFontSize,
                               color:
-                                  _colorRemote == colorOn ? colorOff : colorOn,
+                                  _colorFollow == colorOn ? colorOff : colorOn,
                             ),
                           ),
                         ),
