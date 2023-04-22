@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ManualRemote extends StatelessWidget {
+class Follow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -13,7 +13,7 @@ class ManualRemote extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color(0xFF000099),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.indigo, width: 3),
+          border: Border.all(color: Color(0xFF555599), width: 3),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +21,7 @@ class ManualRemote extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Solo Mode',
+                'Follow Mode',
                 style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
@@ -31,7 +31,7 @@ class ManualRemote extends StatelessWidget {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    width: screenSize.width * 0.4,
+                    width: screenSize.width * 0.3,
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
@@ -42,7 +42,7 @@ class ManualRemote extends StatelessWidget {
                       children: [
                         Center(
                           child: Icon(
-                            Icons.directions_car,
+                            Icons.directions_railway_filled_outlined,
                             color: Colors.black87,
                             size: 100,
                           ),
@@ -51,7 +51,7 @@ class ManualRemote extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            'manual',
+                            '親機',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
                         ),
@@ -63,7 +63,7 @@ class ManualRemote extends StatelessWidget {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    width: screenSize.width * 0.4,
+                    width: screenSize.width * 0.5,
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
@@ -74,7 +74,7 @@ class ManualRemote extends StatelessWidget {
                       children: [
                         Center(
                           child: Icon(
-                            Icons.directions_car_filled_outlined,
+                            Icons.directions_railway_filled_rounded,
                             color: Colors.black87,
                             size: 100,
                           ),
@@ -83,7 +83,7 @@ class ManualRemote extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            'remote',
+                            '子機',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
                         ),
@@ -97,7 +97,7 @@ class ManualRemote extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 20.0, 60.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
       ),
     ]);
   }

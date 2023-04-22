@@ -21,12 +21,9 @@ class UpperArea extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
-        ),
         Container(
           color: Color(0xFF222222),
-          padding: EdgeInsets.fromLTRB(8, 16, 8, 16), // 外側の余白を設定
+          padding: EdgeInsets.fromLTRB(8, 0, 0, 0), // 外側の余白を設定
           child: Text(
             'Operation Board',
             style: TextStyle(
@@ -39,6 +36,9 @@ class UpperArea extends StatelessWidget {
         Divider(
           color: Colors.grey,
           thickness: 3,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 60.0, 0.0),
         ),
       ],
     );

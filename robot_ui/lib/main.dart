@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'upper_area.dart';
 import 'manual_remote.dart';
+import 'follow.dart';
+import 'message_area.dart';
+import 'bottom_navi.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,32 +21,12 @@ class MyApp extends StatelessWidget {
           children: [
             UpperArea(),
             ManualRemote(),
+            Follow(),
+            MessageArea(),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFF222222),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
-            ),
-          ],
-        ),
+        bottomNavigationBar: buildBottomNavigationBar(),
       ),
     );
   }
 }
-
-
-
-
-
-
