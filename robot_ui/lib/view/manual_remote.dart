@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common.dart';
+import '../common/common.dart';
+import '../common/text_styles.dart';
+import '../common/container_styles.dart';
 import 'view_provider.dart';
 
 
@@ -22,13 +24,9 @@ class ManualRemote extends ConsumerWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
-        width: screenSize.width * 1.0,
-        height: 210,
-        decoration: BoxDecoration(
-          color: Color(0xFF01067F),
-          borderRadius: BorderRadius.circular(0),
-          border: Border.all(color: Color(0xFF555555), width: 1),
-        ),
+        width: screenSize.width * boxDecorationStyles.ratioSoloBox,
+        height: boxDecorationStyles.heightSoloBox,
+        decoration: boxDecorationStyles.boxDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,8 +45,8 @@ class ManualRemote extends ConsumerWidget {
                     _changeColor(Mode.manual);
                   },
                   child: Container(
-                    width: screenSize.width * 0.4,
-                    height: 150,
+                    width: screenSize.width * boxDecorationStyles.ratioManualBox,
+                    height: boxDecorationStyles.heightManualBox,
                     decoration: BoxDecoration(
                       color: _colorManual,
                       borderRadius: BorderRadius.circular(0),
@@ -86,8 +84,8 @@ class ManualRemote extends ConsumerWidget {
                     _changeColor(Mode.remote);
                   },
                   child: Container(
-                    width: screenSize.width * 0.4,
-                    height: 150,
+                    width: screenSize.width * boxDecorationStyles.ratioRemoteBox,
+                    height: boxDecorationStyles.heightRemoteBox,
                     decoration: BoxDecoration(
                       color: _colorRemote,
                       borderRadius: BorderRadius.circular(0),

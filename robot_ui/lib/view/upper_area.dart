@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../common.dart';
+import '../common/text_styles.dart';
 
 
 class UpperArea extends StatelessWidget {
@@ -32,7 +32,7 @@ class UpperArea extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
         ),
         Divider(
-          color: Color(0xFF666666),
+          color: Colors.white24,
           thickness: 2,
         ),
         Padding(

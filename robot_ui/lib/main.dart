@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../common/container_styles.dart';
 import 'view/upper_area.dart';
 import 'view/manual_remote.dart';
 import 'view/parent_follow.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: ProviderScope(
       child: Scaffold(
-        backgroundColor: Color(0xFF262626),
+        backgroundColor: boxDecorationStyles.colorBackGround,
         appBar: null,
         body: Column(
           children: [

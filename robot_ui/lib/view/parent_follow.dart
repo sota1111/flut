@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common.dart';
+import '../common/common.dart';
+import '../common/text_styles.dart';
+import '../common/container_styles.dart';
 import 'view_provider.dart';
 
 class ParentFollow extends ConsumerWidget {
@@ -21,13 +23,9 @@ class ParentFollow extends ConsumerWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
-        width: screenSize.width * 1.0,
-        height: 210,
-        decoration: BoxDecoration(
-          color: Color(0xFF01067F),
-          borderRadius: BorderRadius.circular(0),
-          border: Border.all(color: Color(0xFF555555), width: 1),
-        ),
+        width: screenSize.width * boxDecorationStyles.ratioMultiBox,
+        height: boxDecorationStyles.heightMultiBox,
+        decoration: boxDecorationStyles.boxDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,8 +44,8 @@ class ParentFollow extends ConsumerWidget {
                     _changeColor(Mode.parent);
                   },
                   child: Container(
-                    width: screenSize.width * 0.3,
-                    height: 150,
+                    width: screenSize.width * boxDecorationStyles.ratioParentBox,
+                    height: boxDecorationStyles.heightParentBox,
                     decoration: BoxDecoration(
                       color: _colorParent,
                       borderRadius: BorderRadius.circular(0),
@@ -85,8 +83,8 @@ class ParentFollow extends ConsumerWidget {
                     _changeColor(Mode.follow);
                   },
                   child: Container(
-                    width: screenSize.width * 0.5,
-                    height: 150,
+                    width: screenSize.width * boxDecorationStyles.ratioFollowBox,
+                    height: boxDecorationStyles.heightFollowBox,
                     decoration: BoxDecoration(
                       color: _colorFollow,
                       borderRadius: BorderRadius.circular(0),

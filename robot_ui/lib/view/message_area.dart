@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../common.dart';
+import '../common/text_styles.dart';
+import '../common/container_styles.dart';
 
 class MessageArea extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class MessageArea extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
         decoration: BoxDecoration(
-          color: Color(0xFF222222),
+          color: boxDecorationStyles.colorBackGround,
         ),
         padding: const EdgeInsets.fromLTRB(5.0, 15.0, 0.0, 0.0),
         alignment: Alignment.centerLeft, // テキストを左寄せに設定
@@ -26,8 +27,8 @@ class MessageArea extends StatelessWidget {
         width: screenSize.width * 1.0, // 例: 幅を100に設定
         height: 150, //
         decoration: BoxDecoration(
-          color: Color(0xFF262626),
-          border: Border.all(color: Color(0xFF555555), width: 1), // 枠線の色と幅を設定
+          color: boxDecorationStyles.colorBackGround,
+          border: Border.all(color: Colors.white24, width: 1), // 枠線の色と幅を設定
         ),
         alignment: Alignment.topLeft, // テキストを左寄せに設定
         child: Text(

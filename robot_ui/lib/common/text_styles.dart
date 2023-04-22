@@ -36,16 +36,3 @@ class TextStyles {
   );
 
 }
-
-
-enum Mode {
-  neutral,
-  manual,
-  remote,
-  parent,
-  follow,
-}
-
-
-
-
