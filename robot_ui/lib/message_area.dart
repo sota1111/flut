@@ -10,30 +10,33 @@ class MessageArea extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color(0xFF222222),
         ),
-        padding: EdgeInsets.all(8.0), // テキストの内側の間隔を設定
+        padding: const EdgeInsets.fromLTRB(5.0, 15.0, 0.0, 0.0),
         alignment: Alignment.centerLeft, // テキストを左寄せに設定
         child: Text(
-          'Message Area',
+          'MESSAGE AREA',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize:20,
           ),
         ),
       ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+      ),
       Container(
+        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
         width: screenSize.width * 1.0, // 例: 幅を100に設定
         height: 150, //
         decoration: BoxDecoration(
-          color: Color(0xFF222222),
-          border: Border.all(color: Colors.white70, width: 2), // 枠線の色と幅を設定
+          color: Color(0xFF262626),
+          border: Border.all(color: Color(0xFF555555), width: 1), // 枠線の色と幅を設定
         ),
-        padding: EdgeInsets.all(8.0), // テキストの内側の間隔を設定
         alignment: Alignment.centerLeft, // テキストを左寄せに設定
         child: Text(
           'Select Mobility Mode',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
+            color: Colors.white70,
+            fontSize: 15,
           ),
         ),
       ),

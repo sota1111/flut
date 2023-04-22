@@ -7,19 +7,19 @@ BottomNavigationBar buildBottomNavigationBar() {
     items: const <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        label: 'Solo/Follow',
+        label: 'SOLO/FOLLOW',
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.business),
-        label: 'Autonomous',
+        label: 'AUTONOMOUS',
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.school),
-        label: 'other',
+        label: 'OTHER',
       ),
     ],
     unselectedItemColor: Colors.white,
-    selectedLabelStyle: TextStyle(fontSize: 15), // 選択されたラベルのフォントサイズを設定
-    unselectedLabelStyle: TextStyle(fontSize: 15),
+    selectedLabelStyle: TextStyle(fontSize: 12), // 選択されたラベルのフォントサイズを設定
+    unselectedLabelStyle: TextStyle(fontSize: 12),
   );
 }

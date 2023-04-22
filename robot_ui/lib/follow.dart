@@ -9,11 +9,11 @@ class Follow extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
         width: screenSize.width * 1.0, // 例: 幅を100に設定
-        height: 220, // 例: 高さを100に設定
+        height: 210, // 例: 高さを100に設定
         decoration: BoxDecoration(
-          color: Color(0xFF000099),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(0xFF555599), width: 3),
+          color: Color(0xFF01067F),
+          borderRadius: BorderRadius.circular(0),
+          border: Border.all(color: Color(0xFF555555), width: 1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,8 +21,8 @@ class Follow extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Follow Mode',
-                style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                'FOLLOE MODE',
+                style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
             ),
             Row(
@@ -35,8 +35,8 @@ class Follow extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black54, width: 3),
+                      borderRadius: BorderRadius.circular(0),
+                      border: Border.all(color: Color(0xFF555555), width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -51,8 +51,8 @@ class Follow extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            '親機',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            'PARENT DEVICE',
+                            style: TextStyle(fontSize: 12, color: Colors.black54),
                           ),
                         ),
                       ],
@@ -67,8 +67,8 @@ class Follow extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black54, width: 3),
+                      borderRadius: BorderRadius.circular(0),
+                      border: Border.all(color: Color(0xFF555555), width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -83,8 +83,8 @@ class Follow extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            '子機',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            'CHILD DEVICE',
+                            style: TextStyle(fontSize: 12, color: Colors.black54),
                           ),
                         ),
                       ],

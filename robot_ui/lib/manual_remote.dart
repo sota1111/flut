@@ -9,11 +9,11 @@ class ManualRemote extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
         width: screenSize.width * 1.0, // 例: 幅を100に設定
-        height: 220, // 例: 高さを100に設定
+        height: 210, // 例: 高さを100に設定
         decoration: BoxDecoration(
-          color: Color(0xFF000099),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.indigo, width: 3),
+          color: Color(0xFF01067F),
+          borderRadius: BorderRadius.circular(0),
+          border: Border.all(color: Color(0xFF555555), width: 1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,8 +21,8 @@ class ManualRemote extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Solo Mode',
-                style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                'SOLO MODE',
+                style: TextStyle(fontSize: 15, color: Colors.white70),
               ),
             ),
             Row(
@@ -35,8 +35,8 @@ class ManualRemote extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black54, width: 3),
+                      borderRadius: BorderRadius.circular(0),
+                      border: Border.all(color: Colors.black54, width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -51,8 +51,8 @@ class ManualRemote extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            'manual',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            'MANUAL MODE',
+                            style: TextStyle(fontSize: 12, color: Colors.black54),
                           ),
                         ),
                       ],
@@ -67,8 +67,8 @@ class ManualRemote extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       color: Color(0xFFDDDDDD),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black54, width: 3),
+                      borderRadius: BorderRadius.circular(0),
+                      border: Border.all(color: Colors.black54, width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -83,8 +83,8 @@ class ManualRemote extends StatelessWidget {
                           top: 5,
                           left: 10,
                           child: Text(
-                            'remote',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            'REMOTE MODE',
+                            style: TextStyle(fontSize: 12, color: Colors.black54),
                           ),
                         ),
                       ],
