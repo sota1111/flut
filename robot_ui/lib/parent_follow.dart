@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common.dart';
-import 'manual_remote.dart';
+import 'view_provider.dart';
 
 class ParentFollow extends ConsumerWidget {
   @override
