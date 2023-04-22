@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common.dart';
 
-final modeProvider = StateProvider<Mode>((ref) => Mode.neutral);
+final modeProvider = StateNotifierProvider<ModeNotifier, Mode>(
+    (ref) => ModeNotifier(Mode.neutral));
+
+class ModeNotifier extends StateNotifier<Mode> {
+  ModeNotifier(Mode state) : super(state);
+
+  void changeMode(Mode newMode) {
+    if (newMode == state) {
+      state = Mode.neutral;
+    } else {
+      state = newMode;
+    }
+  }
+}
 
 class ManualRemote extends ConsumerWidget {
   @override
@@ -13,36 +26,12 @@ class ManualRemote extends ConsumerWidget {
     Mode modeState = ref.watch(modeProvider);
     Color colorOn = const Color(0xFF222222);
     Color colorOff = const Color(0xFFDDDDDD);
-    Color _colorManual = colorOff;
-    Color _colorRemote = colorOff;
+    Color _colorManual = modeState == Mode.manual ? colorOn : colorOff;
+    Color _colorRemote = modeState == Mode.remote ? colorOn : colorOff;
 
     void _changeColor(Mode modeClicked) {
-      modeState = ref.watch(modeProvider);
-      if (modeState == modeClicked) {
-        modeState = Mode.neutral;
-      } else {
-        modeState = modeClicked;
-      }
-
-      if (modeState == Mode.neutral) {
-        //print("n");
-        _colorManual = colorOff;
-        _colorRemote = colorOff;
-      } else if (modeState == Mode.manual) {
-        //print("m");
-        _colorManual = colorOn;
-        _colorRemote = colorOff;
-      } else if (modeState == Mode.remote) {
-        //print("r");
-        _colorManual = colorOff;
-        _colorRemote = colorOn;
-      }
-      print("_colorManual:$_colorManual¥n");
-      print("modeState:$modeState¥n");
-
-      ref.read(modeProvider.notifier).state = modeState;
+      ref.read(modeProvider.notifier).changeMode(modeClicked);
     }
-
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
