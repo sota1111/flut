@@ -6,54 +6,30 @@ import 'common.dart';
 
 final modeProvider = StateProvider<Mode>((ref) => Mode.neutral);
 
-class ManualRemote extends StatefulWidget {
+class ManualRemote extends ConsumerWidget {
   @override
-  _ManualRemoteState createState() => _ManualRemoteState();
-}
-
-class _ManualRemoteState extends State<ManualRemote> {
-  Color colorOn = const Color(0xFF222222);
-  Color colorOff = const Color(0xFFDDDDDD);
-  late Color _colorManual;
-  late Color _colorRemote;
-  Mode _modeSelected = Mode.neutral;
-
-  _ManualRemoteState() {
-    super.initState();
-    _colorManual = colorOff;
-    _colorRemote = colorOff;
-  }
-
-  void _changeColor(Mode modeClicked) {
-    setState(() {
-      //Mode _modeSellected = watch(modeProvider).state;
-      if (_modeSelected == modeClicked) {
-        _modeSelected = Mode.neutral;
-      } else {
-        _modeSelected = modeClicked;
-      }
-
-      if (_modeSelected == Mode.neutral) {
-        _colorManual = colorOff;
-        _colorRemote = colorOff;
-      } else if (_modeSelected == Mode.manual) {
-        _colorManual = colorOn;
-        _colorRemote = colorOff;
-      } else if (_modeSelected == Mode.remote) {
-        _colorManual = colorOff;
-        _colorRemote = colorOn;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Size screenSize = MediaQuery.of(context).size;
+    final modeState = ref.watch(modeProvider.notifier);
+
+
+    Color colorOn = const Color(0xFF222222);
+    Color colorOff = const Color(0xFFDDDDDD);
+    Color _colorManual = modeState.state == Mode.manual ? colorOn : colorOff;
+    Color _colorRemote = modeState.state == Mode.remote ? colorOn : colorOff;
+
+    void _changeColor(Mode modeClicked) {
+      if (modeState.state == modeClicked) {
+        modeState.state = Mode.neutral;
+      } else {
+        modeState.state = modeClicked;
+      }
+    }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
-        width: screenSize.width * 1.0, // 例: 幅を100に設定
-        height: 210, // 例: 高さを100に設定
+        width: screenSize.width * 1.0,
+        height: 210,
         decoration: BoxDecoration(
           color: Color(0xFF01067F),
           borderRadius: BorderRadius.circular(0),
@@ -121,7 +97,9 @@ class _ManualRemoteState extends State<ManualRemote> {
                     decoration: BoxDecoration(
                       color: _colorRemote,
                       borderRadius: BorderRadius.circular(0),
-                      border: Border.all(color: _colorRemote == colorOn ? colorOff : colorOn, width: 2),
+                      border: Border.all(
+                          color: _colorRemote == colorOn ? colorOff : colorOn,
+                          width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -137,7 +115,11 @@ class _ManualRemoteState extends State<ManualRemote> {
                           left: 10,
                           child: Text(
                             'REMOTE MODE',
-                            style: TextStyle(fontSize: 12, color: _colorRemote == colorOn ? colorOff : colorOn,),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color:
+                                  _colorRemote == colorOn ? colorOff : colorOn,
+                            ),
                           ),
                         ),
                       ],
@@ -155,4 +137,3 @@ class _ManualRemoteState extends State<ManualRemote> {
     ]);
   }
 }
-

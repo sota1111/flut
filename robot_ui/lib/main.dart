@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'upper_area.dart';
 import 'manual_remote.dart';
 import 'follow.dart';
@@ -7,14 +8,19 @@ import 'message_area.dart';
 import 'bottom_navi.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+        home: ProviderScope(
+      child: Scaffold(
         backgroundColor: Color(0xFF262626),
         appBar: null,
         body: Column(
@@ -27,6 +33,6 @@ class MyApp extends StatelessWidget {
         ),
         bottomNavigationBar: buildBottomNavigationBar(),
       ),
-    );
+    ));
   }
 }
