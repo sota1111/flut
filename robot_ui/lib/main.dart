@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'upper_area.dart';
 import 'manual_remote.dart';
-import 'follow.dart';
+import 'parent_follow.dart';
 import 'message_area.dart';
 import 'bottom_navi.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           children: [
             UpperArea(),
             ManualRemote(),
-            //Follow(),
+            ParentFollow(),
             MessageArea(),
           ],
         ),

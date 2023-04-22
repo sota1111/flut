@@ -49,7 +49,7 @@ class ManualRemote extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'SOLO MODE',
-                style: TextStyle(fontSize: 15, color: Colors.white70),
+                style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
             ),
             Row(
@@ -84,7 +84,7 @@ class ManualRemote extends ConsumerWidget {
                           child: Text(
                             'MANUAL MODE',
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 color: _colorManual == colorOn
                                     ? colorOff
                                     : colorOn),
@@ -123,7 +123,7 @@ class ManualRemote extends ConsumerWidget {
                           child: Text(
                             'REMOTE MODE',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 13,
                               color:
                                   _colorRemote == colorOn ? colorOff : colorOn,
                             ),

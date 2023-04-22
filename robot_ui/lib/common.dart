@@ -5,6 +5,6 @@ enum Mode {
   manual,
   remote,
   parent,
-  child,
+  follow,
 }
 
