@@ -24,14 +24,14 @@ class MessageArea extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
       ),
       Container(
-        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
         width: screenSize.width * 1.0, // 例: 幅を100に設定
         height: 150, //
         decoration: BoxDecoration(
           color: Color(0xFF262626),
           border: Border.all(color: Color(0xFF555555), width: 1), // 枠線の色と幅を設定
         ),
-        alignment: Alignment.centerLeft, // テキストを左寄せに設定
+        alignment: Alignment.topLeft, // テキストを左寄せに設定
         child: Text(
           'Select Mobility Mode',
           style: TextStyle(
