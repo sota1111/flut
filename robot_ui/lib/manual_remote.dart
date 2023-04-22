@@ -10,21 +10,39 @@ class ManualRemote extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Size screenSize = MediaQuery.of(context).size;
-    final modeState = ref.watch(modeProvider.notifier);
-
-
+    Mode modeState = ref.watch(modeProvider);
     Color colorOn = const Color(0xFF222222);
     Color colorOff = const Color(0xFFDDDDDD);
-    Color _colorManual = modeState.state == Mode.manual ? colorOn : colorOff;
-    Color _colorRemote = modeState.state == Mode.remote ? colorOn : colorOff;
+    Color _colorManual = colorOff;
+    Color _colorRemote = colorOff;
 
     void _changeColor(Mode modeClicked) {
-      if (modeState.state == modeClicked) {
-        modeState.state = Mode.neutral;
+      modeState = ref.watch(modeProvider);
+      if (modeState == modeClicked) {
+        modeState = Mode.neutral;
       } else {
-        modeState.state = modeClicked;
+        modeState = modeClicked;
       }
+
+      if (modeState == Mode.neutral) {
+        //print("n");
+        _colorManual = colorOff;
+        _colorRemote = colorOff;
+      } else if (modeState == Mode.manual) {
+        //print("m");
+        _colorManual = colorOn;
+        _colorRemote = colorOff;
+      } else if (modeState == Mode.remote) {
+        //print("r");
+        _colorManual = colorOff;
+        _colorRemote = colorOn;
+      }
+      print("_colorManual:$_colorManual¥n");
+      print("modeState:$modeState¥n");
+
+      ref.read(modeProvider.notifier).state = modeState;
     }
+
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
