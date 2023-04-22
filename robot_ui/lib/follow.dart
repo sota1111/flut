@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Follow extends StatelessWidget {
+
+class Follow extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
+  _FollowState createState() => _FollowState();
+}
+
+class _FollowState extends State<Follow> {
+  @override
+  Widget build(BuildContext context){
+
     Size screenSize = MediaQuery.of(context).size;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

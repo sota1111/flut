@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           children: [
             UpperArea(),
             ManualRemote(),
-            Follow(),
+            //Follow(),
             MessageArea(),
           ],
         ),

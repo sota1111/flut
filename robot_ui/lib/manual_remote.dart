@@ -1,7 +1,51 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'common.dart';
 
-class ManualRemote extends StatelessWidget {
+final modeProvider = StateProvider<Mode>((ref) => Mode.neutral);
+
+class ManualRemote extends StatefulWidget {
+  @override
+  _ManualRemoteState createState() => _ManualRemoteState();
+}
+
+class _ManualRemoteState extends State<ManualRemote> {
+  Color colorOn = const Color(0xFF222222);
+  Color colorOff = const Color(0xFFDDDDDD);
+  late Color _colorManual;
+  late Color _colorRemote;
+  Mode _modeSelected = Mode.neutral;
+
+  _ManualRemoteState() {
+    super.initState();
+    _colorManual = colorOff;
+    _colorRemote = colorOff;
+  }
+
+  void _changeColor(Mode modeClicked) {
+    setState(() {
+      //Mode _modeSellected = watch(modeProvider).state;
+      if (_modeSelected == modeClicked) {
+        _modeSelected = Mode.neutral;
+      } else {
+        _modeSelected = modeClicked;
+      }
+
+      if (_modeSelected == Mode.neutral) {
+        _colorManual = colorOff;
+        _colorRemote = colorOff;
+      } else if (_modeSelected == Mode.manual) {
+        _colorManual = colorOn;
+        _colorRemote = colorOff;
+      } else if (_modeSelected == Mode.remote) {
+        _colorManual = colorOff;
+        _colorRemote = colorOn;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -29,14 +73,18 @@ class ManualRemote extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    _changeColor(Mode.manual);
+                  },
                   child: Container(
                     width: screenSize.width * 0.4,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: Color(0xFFDDDDDD),
+                      color: _colorManual,
                       borderRadius: BorderRadius.circular(0),
-                      border: Border.all(color: Colors.black54, width: 2),
+                      border: Border.all(
+                          color: _colorManual == colorOn ? colorOff : colorOn,
+                          width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -52,23 +100,28 @@ class ManualRemote extends StatelessWidget {
                           left: 10,
                           child: Text(
                             'MANUAL MODE',
-                            style: TextStyle(fontSize: 12, color: Colors.black54),
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: _colorManual == colorOn
+                                    ? colorOff
+                                    : colorOn),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    _changeColor(Mode.remote);
+                  },
                   child: Container(
                     width: screenSize.width * 0.4,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: Color(0xFFDDDDDD),
+                      color: _colorRemote,
                       borderRadius: BorderRadius.circular(0),
-                      border: Border.all(color: Colors.black54, width: 2),
+                      border: Border.all(color: _colorRemote == colorOn ? colorOff : colorOn, width: 2),
                     ),
                     child: Stack(
                       children: [
@@ -84,7 +137,7 @@ class ManualRemote extends StatelessWidget {
                           left: 10,
                           child: Text(
                             'REMOTE MODE',
-                            style: TextStyle(fontSize: 12, color: Colors.black54),
+                            style: TextStyle(fontSize: 12, color: _colorRemote == colorOn ? colorOff : colorOn,),
                           ),
                         ),
                       ],
@@ -102,3 +155,4 @@ class ManualRemote extends StatelessWidget {
     ]);
   }
 }
+
