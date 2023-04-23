@@ -33,7 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _addressController = TextEditingController(text: '192.168.42.100');
+  //final TextEditingController _addressController = TextEditingController(text: '192.168.42.100');
+  final TextEditingController _addressController = TextEditingController(text: '127.0.0.1');
   final TextEditingController _portController = TextEditingController(text: '55001');
   final TextEditingController _sendMessage = TextEditingController(text: '%GetUnitInfo\$');
   Socket? socket;
