@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text("Cognito Sample"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -72,6 +72,26 @@ class MyApp extends StatelessWidget {
                   } else {
                     print('Please confirm sign up');
                   }
+                } on CognitoUserException catch (e) {
+                  // エラーメッセージを表示します
+                  errorController.value = e.message!;
+                } catch (e) {
+                  print(e);
+                }
+              },
+            ),
+            ElevatedButton(
+              child: Text("Sign In"),
+              onPressed: () async {
+                String username = usernameController.text;
+                String password = passwordController.text;
+
+                try {
+                  final cognitoUser = new CognitoUser(username, userPool);
+                  final authDetails = new AuthenticationDetails(
+                      username: username, password: password);
+                  await cognitoUser.authenticateUser(authDetails);
+                  print('Sign in successful');
                 } on CognitoUserException catch (e) {
                   // エラーメッセージを表示します
                   errorController.value = e.message!;
