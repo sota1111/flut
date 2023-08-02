@@ -59,6 +59,20 @@ class _AuthenticationAppState extends State<AuthenticationApp> {
     }
   }
 
+  Future<void> _callAuthApi() async {
+    const String url = 'https://oann6llonk.execute-api.ap-northeast-1.amazonaws.com/Prod/ask';
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      print('API Response: ${response.body}');
+    } else {
+      print('Error calling API: ${response.statusCode}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Authenticator(
@@ -78,6 +92,10 @@ class _AuthenticationAppState extends State<AuthenticationApp> {
                 ElevatedButton(
                   onPressed: _callApi,
                   child: const Text('API呼び出し'),
+                ),
+                ElevatedButton(
+                  onPressed: _callAuthApi,
+                  child: const Text('認証API呼び出し'),
                 ),
               ],
             ),
