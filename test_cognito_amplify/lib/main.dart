@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AuthenticationApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class AuthenticationApp extends StatefulWidget {
+  const AuthenticationApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<AuthenticationApp> createState() => _AuthenticationAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _AuthenticationAppState extends State<AuthenticationApp> {
   @override
   void initState() {
     super.initState();
