@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
-
-import 'amplify_configuration.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,10 +26,20 @@ class _MyAppState extends State<MyApp> {
   void _configureAmplify() async {
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
-      await Amplify.configure(amplify_config as String);
+      final jsonString = await rootBundle.loadString('assets/amplify_configuration.json');
+      await Amplify.configure(jsonString);
       print('Successfully configured');
     } on Exception catch (e) {
       print('Error configuring Amplify: $e');
+    }
+  }
+
+  void _signOut() async {
+    try {
+      await Amplify.Auth.signOut();
+      print('User successfully signed out');
+    } on AuthException catch (e) {
+      print('Error signing out: $e');
     }
   }
 
@@ -40,8 +50,17 @@ class _MyAppState extends State<MyApp> {
         builder: Authenticator.builder(),
         home: Scaffold(
           appBar: AppBar(title: const Text('ホーム')),
-          body: const Center(
-            child: Text('ログイン成功！', style: TextStyle(fontSize: 32.0)),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('ログイン成功！', style: TextStyle(fontSize: 32.0)),
+                ElevatedButton(
+                  onPressed: _signOut,
+                  child: const Text('ログアウト'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,11 +1,11 @@
-const amplify_config = {
+{
   "auth": {
     "plugins": {
       "awsCognitoAuthPlugin": {
         "CognitoUserPool": {
           "Default": {
-            "PoolId": "hogehoge",
-            "AppClientId": "hogehoge",
+            "PoolId": "ap-northeast-1_hvrlhTL9X",
+            "AppClientId": "db45ulgkpq59deqhq5ikvvqlr",
             "Region": "ap-northeast-1"
           }
         },
@@ -33,4 +33,4 @@ const amplify_config = {
       }
     }
   }
-};
+}
