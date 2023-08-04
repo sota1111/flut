@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:convert';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
@@ -18,6 +19,7 @@ class AuthenticationApp extends StatefulWidget {
 }
 
 class _AuthenticationAppState extends State<AuthenticationApp> {
+  String idToken = '';
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,13 @@ class _AuthenticationAppState extends State<AuthenticationApp> {
     } on Exception catch (e) {
       print('Error configuring Amplify: $e');
     }
+  }
+
+  Future<void> fetchCognitoAuthSession() async {
+    final cognitoPlugin = Amplify.Auth.getPlugin(AmplifyAuthCognito.pluginKey);
+    final result = await cognitoPlugin.fetchAuthSession();
+    final identityId = result.identityIdResult.value;
+    safePrint("Current user's identity ID: $identityId");
   }
 
   void _signOut() async {
@@ -61,9 +70,15 @@ class _AuthenticationAppState extends State<AuthenticationApp> {
 
   Future<void> _callAuthApi() async {
     const String url = 'https://oann6llonk.execute-api.ap-northeast-1.amazonaws.com/Prod/ask';
+    //final token = await
+    await fetchCognitoAuthSession();
+
     final response = await http.get(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': idToken, // トークンをヘッダーに追加
+      },
     );
 
     if (response.statusCode == 200) {
