@@ -10,6 +10,17 @@
       "StackName": "amplify-testamplify-dev-103617",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:132308390451:stack/amplify-testamplify-dev-103617/4f9020d0-3267-11ee-a101-0e0b4782d1d9",
       "AmplifyAppId": "d1am5qx46wngbe"
+    },
+    "categories": {
+      "function": {
+        "testCognito": {
+          "deploymentBucketName": "amplify-testamplify-dev-103617-deployment",
+          "s3Key": "amplify-builds/testCognito-6d415871542f44642f61-build.zip"
+        }
+      },
+      "api": {
+        "api": {}
+      }
     }
   }
 }
