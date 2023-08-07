@@ -1,4 +1,18 @@
 const amplifyconfig = '''{
+  "UserAgent": "aws-amplify-cli/2.0",
+  "Version": "1.0",
+  "api": {
+    "plugins": {
+      "awsAPIPlugin": {
+        "YOUR_API_NAME": {
+          "endpointType": "REST",
+          "endpoint": "https://ltw9fjn5g6.execute-api.ap-northeast-1.amazonaws.com/default",
+          "region": "ap-northeast-1",
+          "authorizationType": "AMAZON_COGNITO_USER_POOLS"
+        }
+      }
+    }
+  },
   "auth": {
     "plugins": {
       "awsCognitoAuthPlugin": {
