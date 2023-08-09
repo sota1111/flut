@@ -1,0 +1,23 @@
+{
+  "authSelections": "userPoolOnly",
+  "resourceName": "amplifysam4d3c9883",
+  "serviceType": "imported",
+  "region": "ap-northeast-1",
+  "usernameAttributes": [
+    "email"
+  ],
+  "requiredAttributes": [
+    "email"
+  ],
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [
+    "Requires Lowercase",
+    "Requires Uppercase",
+    "Requires Numbers"
+  ],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
+}

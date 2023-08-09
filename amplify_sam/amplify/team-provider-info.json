@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifysam-dev-82237-authRole",
+      "UnauthRoleArn": "arn:aws:iam::132308390451:role/amplify-amplifysam-dev-82237-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::132308390451:role/amplify-amplifysam-dev-82237-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-amplifysam-dev-82237-deployment",
+      "UnauthRoleName": "amplify-amplifysam-dev-82237-unauthRole",
+      "StackName": "amplify-amplifysam-dev-82237",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:132308390451:stack/amplify-amplifysam-dev-82237/a18240a0-370b-11ee-950a-0aa6d3d884db",
+      "AmplifyAppId": "dhoc2gy2pk5xm"
+    },
+    "categories": {
+      "auth": {
+        "amplifysam4d3c9883": {
+          "userPoolId": "ap-northeast-1_hvrlhTL9X",
+          "userPoolName": "chat",
+          "webClientId": "db45ulgkpq59deqhq5ikvvqlr",
+          "nativeClientId": "db45ulgkpq59deqhq5ikvvqlr"
+        }
+      }
+    }
+  }
+}
