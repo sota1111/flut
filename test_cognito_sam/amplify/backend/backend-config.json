@@ -1,6 +1,6 @@
 {
   "auth": {
-    "dev6f68cdab": {
+    "dev5d24c2b5": {
       "customAuth": false,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -9,91 +9,35 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_dev6f68cdab_allowUnauthenticatedIdentities": {
+    "AMPLIFY_auth_dev5d24c2b5_nativeClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "dev6f68cdab"
+          "resourceName": "dev5d24c2b5"
         }
       ]
     },
-    "AMPLIFY_auth_dev6f68cdab_authRoleArn": {
+    "AMPLIFY_auth_dev5d24c2b5_userPoolId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "dev6f68cdab"
+          "resourceName": "dev5d24c2b5"
         }
       ]
     },
-    "AMPLIFY_auth_dev6f68cdab_authRoleName": {
+    "AMPLIFY_auth_dev5d24c2b5_userPoolName": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "dev6f68cdab"
+          "resourceName": "dev5d24c2b5"
         }
       ]
     },
-    "AMPLIFY_auth_dev6f68cdab_identityPoolId": {
+    "AMPLIFY_auth_dev5d24c2b5_webClientId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_identityPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_nativeClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_unauthRoleArn": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_unauthRoleName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_userPoolId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_userPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
-        }
-      ]
-    },
-    "AMPLIFY_auth_dev6f68cdab_webClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "dev6f68cdab"
+          "resourceName": "dev5d24c2b5"
         }
       ]
     }
