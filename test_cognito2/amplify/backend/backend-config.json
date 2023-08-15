@@ -1,6 +1,6 @@
 {
   "auth": {
-    "testcognito27c6c2c1b": {
+    "testcognito202006d91": {
       "customAuth": false,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -9,35 +9,91 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_testcognito27c6c2c1b_nativeClientId": {
+    "AMPLIFY_auth_testcognito202006d91_allowUnauthenticatedIdentities": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "testcognito27c6c2c1b"
+          "resourceName": "testcognito202006d91"
         }
       ]
     },
-    "AMPLIFY_auth_testcognito27c6c2c1b_userPoolId": {
+    "AMPLIFY_auth_testcognito202006d91_authRoleArn": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "testcognito27c6c2c1b"
+          "resourceName": "testcognito202006d91"
         }
       ]
     },
-    "AMPLIFY_auth_testcognito27c6c2c1b_userPoolName": {
+    "AMPLIFY_auth_testcognito202006d91_authRoleName": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "testcognito27c6c2c1b"
+          "resourceName": "testcognito202006d91"
         }
       ]
     },
-    "AMPLIFY_auth_testcognito27c6c2c1b_webClientId": {
+    "AMPLIFY_auth_testcognito202006d91_identityPoolId": {
       "usedBy": [
         {
           "category": "auth",
-          "resourceName": "testcognito27c6c2c1b"
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_identityPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_unauthRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_unauthRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
+        }
+      ]
+    },
+    "AMPLIFY_auth_testcognito202006d91_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "testcognito202006d91"
         }
       ]
     }

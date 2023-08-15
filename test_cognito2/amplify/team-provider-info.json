@@ -13,11 +13,18 @@
     },
     "categories": {
       "auth": {
-        "testcognito27c6c2c1b": {
+        "testcognito202006d91": {
           "userPoolId": "ap-northeast-1_hvrlhTL9X",
           "userPoolName": "chat",
           "webClientId": "db45ulgkpq59deqhq5ikvvqlr",
-          "nativeClientId": "db45ulgkpq59deqhq5ikvvqlr"
+          "nativeClientId": "db45ulgkpq59deqhq5ikvvqlr",
+          "identityPoolId": "ap-northeast-1:b39199c7-8bd9-4568-be2d-7eee202d49e3",
+          "identityPoolName": "cognito-id-pool2",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::132308390451:role/service-role/cognito-id-pool-auth",
+          "authRoleName": "service-role/cognito-id-pool-auth",
+          "unauthRoleArn": "arn:aws:iam::132308390451:role/service-role/cognito-id-pool-guest",
+          "unauthRoleName": "service-role/cognito-id-pool-guest"
         }
       }
     }
