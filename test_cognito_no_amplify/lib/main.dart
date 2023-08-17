@@ -64,9 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
       session = await cognitoUser.authenticateUser(authDetails);
       print("Authentication finished.");
       if (session != null) {
-        print("Login successful!");  // ログイン成功時のメッセージ
+        print("Login successful!");
       } else {
-        print("Login failed. Session is null.");  // ログイン失敗時のメッセージ
+        print("Login failed. Session is null.");
       }
       setState(() {});  // 更新UI
     } catch (e) {
@@ -118,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _logout() {
     session = null;
-    setState(() {}); // 更新UI
+    setState(() {});
+    print("Logout successful!");
   }
 }
