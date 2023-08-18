@@ -57,20 +57,58 @@ class _MyAppState extends State<MyApp> {
         awsSigV4Client,
         method: 'GET',
         path: '',
-        headers: {'header-1': 'one', 'header-2': 'two'},
-        queryParams: {'tracking': 'x123'},
-        body: {'color': 'blue'},
+        headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
+        queryParams: Map<String, String>.from({'tracking': 'x123'}),
+        body: jsonEncode(Map<String, dynamic>.from({'input_text': '列を消した時の点数を教えて'})),
       );
-
-      final headers = {
-        'Authorization': jwtToken,
-        'header-2': 'two',
-      };
 
       try {
         http.Response response = await http.get(
           Uri.parse(sigV4Request.url!),
-          headers: headers,
+          headers: Map<String, String>.from({
+            'Authorization': jwtToken,
+            'header-2': 'two',
+          }),
+        );
+        print(response.body);
+      } catch (e) {
+        print(e);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _performAuthorizedPost() async {
+    try {
+      final jwtToken = await fetchIdToken();
+      await credentials.getAwsCredentials(jwtToken);
+
+      final AwsSigV4Client awsSigV4Client = AwsSigV4Client(
+        credentials.accessKeyId!,
+        credentials.secretAccessKey!,
+        'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
+        sessionToken: credentials.sessionToken,
+        region: 'ap-northeast-1',
+      );
+
+      final SigV4Request sigV4Request = SigV4Request(
+        awsSigV4Client,
+        method: 'POST',
+        path: '',
+        headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
+        queryParams: Map<String, String>.from({'tracking': 'x123'}),
+        body: Map<String, dynamic>.from({'input_text': '列を消した時の点数を教えて'}),
+      );
+
+      try {
+        http.Response response = await http.post(
+          Uri.parse(sigV4Request.url!),
+          headers: Map<String, String>.from({
+            'Authorization': jwtToken,
+            'header-2': 'two',
+          }),
+          body: sigV4Request.body,
         );
         print(response.body);
       } catch (e) {
@@ -113,7 +151,12 @@ class _MyAppState extends State<MyApp> {
                 Text('Response: $_responseText'),
                 ElevatedButton(
                   onPressed: _performAuthorizedGet,
-                  child: Text('Call Lambda'),
+                  child: Text('Call Get'),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _performAuthorizedPost,
+                  child: Text('Call Post'),
                 ),
                 SizedBox(height: 20),
                 Text('API Result: $_apiResult'),
