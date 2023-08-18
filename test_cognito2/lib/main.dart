@@ -1,12 +1,14 @@
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart' as auth;
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:amplify_api/amplify_api.dart';
+import 'package:amazon_cognito_identity_dart_2/sig_v4.dart';
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:http/http.dart' as http;
 import 'amplifyconfiguration.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'config.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +22,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  CognitoUserSession? session;
+
   String _responseText = "";
   String _apiResult = "";
   @override
@@ -45,8 +49,8 @@ class _MyAppState extends State<MyApp> {
 
   void _configureAmplify() async {
     try {
-      await Amplify.addPlugin(AmplifyAuthCognito());
-      await Amplify.addPlugin(AmplifyAPI()); // Add the API plugin
+      final authPlugin = auth.AmplifyAuthCognito();
+      Amplify.addPlugin(authPlugin);
       await Amplify.configure(amplifyconfig);
       safePrint('Successfully configured');
     } on Exception catch (e) {
@@ -54,28 +58,63 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future<void> _callLambda() async {
-    print('call Lambda');
+  Future<String> fetchIdToken() async {
     try {
-      print('try');
-      setState(() {
-        _responseText = "try";
-      });
-      final restOperation = Amplify.API.get('chat-docker');
-      print('try2');
-      final response = await restOperation.response;
-      print('GET call succeeded: ${response.decodeBody()}');
+      final result = await Amplify.Auth.fetchAuthSession() as auth.CognitoAuthSession;
 
-      setState(() {
-        _responseText = response.decodeBody();
-      });
+      if (result.userPoolTokensResult.value != null) {
+        return result.userPoolTokensResult.value!.idToken.raw;
+      } else {
+        throw Exception('Failed to fetch user pool tokens');
+      }
+    } catch (e) {
+      print('Error fetching auth session: $e');
+      throw e;
+    }
+  }
 
-    } on ApiException catch (e) {
-      print('GET call failed');
-      setState(() {
-        _responseText = "error";
-        print('GET call failed: $e');
-      });
+
+  Future<void> _performAuthorizedGet() async {
+    String? jwtToken;
+    AuthSession session = await Amplify.Auth.fetchAuthSession();
+    final result = await Amplify.Auth.fetchAuthSession() as auth.CognitoAuthSession;
+    jwtToken = result.userPoolTokensResult.value.idToken.raw;
+    await credentials.getAwsCredentials(jwtToken);
+
+    final localSession = session;
+
+    if (localSession != null) {
+      final AwsSigV4Client awsSigV4Client = AwsSigV4Client(
+        credentials.accessKeyId!,
+        credentials.secretAccessKey!,
+        'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
+        sessionToken: credentials.sessionToken,
+        region: 'ap-northeast-1',
+      );
+
+      final SigV4Request sigV4Request = SigV4Request(
+        awsSigV4Client,
+        method: 'GET',
+        path: '',
+        headers: {'header-1': 'one', 'header-2': 'two'},
+        queryParams: {'tracking': 'x123'},
+        body: {'color': 'blue'},
+      );
+
+      final headers = {
+        if (jwtToken != null) 'Authorization': jwtToken,
+        'header-2': 'two',
+      };
+
+      try {
+        http.Response response = await http.get(
+          Uri.parse(sigV4Request.url!),
+          headers: headers,
+        );
+        print(response.body);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
@@ -102,14 +141,14 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(height: 20),
                 Text('Response: $_responseText'),
                 ElevatedButton(
-                  onPressed: _callLambda,
+                  onPressed: _performAuthorizedGet,
                   child: Text('Call Lambda'),
                 ),
                 SizedBox(height: 20),
-                Text('API Result: $_apiResult'), // 新しく追加したAPIのレスポンスを表示
+                Text('API Result: $_apiResult'),
                 ElevatedButton(
                   onPressed: _getFleetData,
-                  child: Text('Get Fleet Data'), // 新しく追加したボタン
+                  child: Text('Get Fleet Data'),
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
