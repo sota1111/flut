@@ -1,0 +1,101 @@
+{
+  "auth": {
+    "chatcognitob3270685": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_chatcognitob3270685_allowUnauthenticatedIdentities": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_authRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_authRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_identityPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_identityPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_unauthRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_unauthRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    },
+    "AMPLIFY_auth_chatcognitob3270685_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "chatcognitob3270685"
+        }
+      ]
+    }
+  }
+}

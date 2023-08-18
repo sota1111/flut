@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chatcognito-dev-154935-authRole",
+      "UnauthRoleArn": "arn:aws:iam::132308390451:role/amplify-chatcognito-dev-154935-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::132308390451:role/amplify-chatcognito-dev-154935-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-chatcognito-dev-154935-deployment",
+      "UnauthRoleName": "amplify-chatcognito-dev-154935-unauthRole",
+      "StackName": "amplify-chatcognito-dev-154935",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:132308390451:stack/amplify-chatcognito-dev-154935/6591b9c0-3d93-11ee-8576-0e013395fad1",
+      "AmplifyAppId": "d3mv6vfqei3rje"
+    },
+    "categories": {
+      "auth": {
+        "chatcognitob3270685": {
+          "userPoolId": "ap-northeast-1_hvrlhTL9X",
+          "userPoolName": "chat",
+          "webClientId": "db45ulgkpq59deqhq5ikvvqlr",
+          "nativeClientId": "db45ulgkpq59deqhq5ikvvqlr",
+          "identityPoolId": "ap-northeast-1:b39199c7-8bd9-4568-be2d-7eee202d49e3",
+          "identityPoolName": "cognito-id-pool2",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::132308390451:role/service-role/cognito-id-pool-auth",
+          "authRoleName": "service-role/cognito-id-pool-auth",
+          "unauthRoleArn": "arn:aws:iam::132308390451:role/service-role/cognito-id-pool-guest",
+          "unauthRoleName": "service-role/cognito-id-pool-guest"
+        }
+      }
+    }
+  }
+}
