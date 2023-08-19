@@ -40,26 +40,29 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  Future<AwsSigV4Client> _createSigV4Client() async {
+    return AwsSigV4Client(
+      credentials.accessKeyId!,
+      credentials.secretAccessKey!,
+      'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
+      sessionToken: credentials.sessionToken,
+      region: 'ap-northeast-1',
+    );
+  }
+
   Future<void> _performAuthorizedGet() async {
     try {
       final jwtToken = await fetchIdToken();
       await credentials.getAwsCredentials(jwtToken);
-
-      final AwsSigV4Client awsSigV4Client = AwsSigV4Client(
-        credentials.accessKeyId!,
-        credentials.secretAccessKey!,
-        'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
-        sessionToken: credentials.sessionToken,
-        region: 'ap-northeast-1',
-      );
+      final awsSigV4Client = await _createSigV4Client();
 
       final SigV4Request sigV4Request = SigV4Request(
         awsSigV4Client,
         method: 'GET',
         path: '',
-        headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
-        queryParams: Map<String, String>.from({'tracking': 'x123'}),
-        body: jsonEncode(Map<String, dynamic>.from({'input_text': '列を消した時の点数を教えて'})),
+        //headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
+        //queryParams: Map<String, String>.from({'tracking': 'x123'}),
+        //body: jsonEncode(Map<String, dynamic>.from({'input_text': 'none'})),
       );
 
       try {
@@ -83,21 +86,14 @@ class _MyAppState extends State<MyApp> {
     try {
       final jwtToken = await fetchIdToken();
       await credentials.getAwsCredentials(jwtToken);
-
-      final AwsSigV4Client awsSigV4Client = AwsSigV4Client(
-        credentials.accessKeyId!,
-        credentials.secretAccessKey!,
-        'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
-        sessionToken: credentials.sessionToken,
-        region: 'ap-northeast-1',
-      );
+      final awsSigV4Client = await _createSigV4Client();
 
       final SigV4Request sigV4Request = SigV4Request(
         awsSigV4Client,
         method: 'POST',
         path: '',
-        headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
-        queryParams: Map<String, String>.from({'tracking': 'x123'}),
+        //headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
+        //queryParams: Map<String, String>.from({'tracking': 'x123'}),
         body: Map<String, dynamic>.from({'input_text': '列を消した時の点数を教えて'}),
       );
 
