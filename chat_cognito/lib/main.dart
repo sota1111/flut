@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'amplifyconfiguration.dart';
 import 'dart:convert';
 import 'config.dart';
+import 'chat_tetris.dart';
 
 void main() {
   runApp(const MyApp());
@@ -137,38 +138,7 @@ class _MyAppState extends State<MyApp> {
     return Authenticator(
       child: MaterialApp(
         builder: Authenticator.builder(),
-        home: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('You are logged in!'),
-                SizedBox(height: 20),
-                Text('Response: $_responseText'),
-                ElevatedButton(
-                  onPressed: _performAuthorizedGet,
-                  child: Text('Call Get'),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _performAuthorizedPost,
-                  child: Text('Call Post'),
-                ),
-                SizedBox(height: 20),
-                Text('API Result: $_apiResult'),
-                ElevatedButton(
-                  onPressed: () => _getFleetData(),
-                  child: Text('Get Fleet Data'),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _signOut,
-                  child: Text('Sign Out'),
-                ),
-              ],
-            ),
-          ),
-        ),
+        home: ChatRoomTetris(), // ここを変更しました
       ),
     );
   }
