@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     return AwsSigV4Client(
       credentials.accessKeyId!,
       credentials.secretAccessKey!,
-      'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/ask',
+      'https://baf4kq3w1d.execute-api.ap-northeast-1.amazonaws.com/Prod/',
       sessionToken: credentials.sessionToken,
       region: 'ap-northeast-1',
     );
@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       final SigV4Request sigV4Request = SigV4Request(
         awsSigV4Client,
         method: 'GET',
-        path: '',
+        path: 'ask',
         //headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
         //queryParams: Map<String, String>.from({'tracking': 'x123'}),
         //body: jsonEncode(Map<String, dynamic>.from({'input_text': 'none'})),
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
           Uri.parse(sigV4Request.url!),
           headers: Map<String, String>.from({
             'Authorization': jwtToken,
-            'header-2': 'two',
+            'header': 'head',
           }),
         );
         print(response.body);
@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
       final SigV4Request sigV4Request = SigV4Request(
         awsSigV4Client,
         method: 'POST',
-        path: '',
+        path: 'ask',
         //headers: Map<String, String>.from({'header-1': 'one', 'header-2': 'two'}),
         //queryParams: Map<String, String>.from({'tracking': 'x123'}),
         body: Map<String, dynamic>.from({'input_text': '列を消した時の点数を教えて'}),
@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> {
           Uri.parse(sigV4Request.url!),
           headers: Map<String, String>.from({
             'Authorization': jwtToken,
-            'header-2': 'two',
+            'header': 'head',
           }),
           body: sigV4Request.body,
         );
