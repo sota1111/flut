@@ -3,8 +3,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'utilities.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'apiService.dart';
 
 class ChatRoomTetris extends StatefulWidget {
   const ChatRoomTetris({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class ChatRoomState extends State<ChatRoomTetris> {
     lastName: "",
     imageUrl: ImageUrls.tetrisFace0,
   );
-
+  ApiService? _apiService;
 
   @override
   void initState() {
@@ -34,10 +33,12 @@ class ChatRoomState extends State<ChatRoomTetris> {
       text: "ルール把握してないけど、ヨシ！",
     ));
 
+    _apiService = ApiService();
     initializeAsyncMethods();
   }
   Future<void> initializeAsyncMethods() async {
-    //サーバサイドを実装したら、追記する
+    //await _apiService?.signOut();
+    Map<String, dynamic>? apiResponseData = await _apiService?.performAuthorizedGet();
   }
 
   @override
@@ -70,10 +71,10 @@ class ChatRoomState extends State<ChatRoomTetris> {
 
     _addMessage(textMessage);
 
-    Map<String, dynamic> apiResponseData = await fetchResponseFromApi(message.text);
+    Map<String, dynamic>? apiResponseData = await _apiService?.performAuthorizedPost(message.text);
 
     Future.delayed(const Duration(seconds: 1), () {
-      final responseText = apiResponseData['Response'] ?? 'Failed';
+      final responseText = apiResponseData?['Response'] ?? 'Failed';
       debugPrint(responseText);
 
       // Remove first newline character from the responseText
@@ -90,28 +91,5 @@ class ChatRoomState extends State<ChatRoomTetris> {
       );
       _addMessage(responseMessage);
     });
-
-
-  }
-
-  Future<Map<String, dynamic>> fetchResponseFromApi(String inputText) async {
-    const String url =
-        'https://r30snkhpsj.execute-api.ap-northeast-1.amazonaws.com/Prod/hello';
-    final Map<String, String> headers = {'Content-Type': 'application/json'};
-    //debugPrint("inputText:$inputText");
-    final Map<String, String> data = {
-      'input_text': inputText,
-    };
-    final response = await http.post(Uri.parse(url), headers: headers, body: json.encode(data));
-    //debugPrint("response.statusCode:${response.statusCode}");
-    if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      debugPrint(jsonResponse['Response']);
-      return {
-        'Response': jsonResponse['Response'],
-      };
-    } else {
-      return {'Response': 'Failed'};
-    }
   }
 }
