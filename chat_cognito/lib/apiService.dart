@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'config.dart';
 
 class ApiService {
+  String? _identityId;
+  String? get getIdentityId => _identityId;
 
   Future<AwsSigV4Client> _createSigV4Client() async {
     return AwsSigV4Client(
@@ -58,12 +60,17 @@ class ApiService {
       final jwtToken = await _fetchIdToken();
       await credentials.getAwsCredentials(jwtToken);
       final awsSigV4Client = await _createSigV4Client();
+      String characterName = "tetris_cat";
 
       final SigV4Request sigV4Request = SigV4Request(
         awsSigV4Client,
         method: 'POST',
         path: 'ask',
-        body: Map<String, dynamic>.from({'input_text': inputText}),
+        body: Map<String, dynamic>.from({
+          'input_text': inputText,
+          'identity_id': _identityId,
+          'character_name': characterName
+        }),
       );
 
       try {
@@ -78,6 +85,7 @@ class ApiService {
 
         if (response.statusCode == 200) {
           var jsonResponse = json.decode(response.body);
+          print("jsonResponse:$jsonResponse");
           return jsonResponse;
         } else {
           return {'status': 'Failed', 'reason': 'Non-200 response'};
@@ -94,6 +102,7 @@ class ApiService {
 
   Future<String> _fetchIdToken() async {
     final result = await Amplify.Auth.fetchAuthSession() as auth.CognitoAuthSession;
+    _identityId = result.userSubResult.value;
     if (result.userPoolTokensResult.value != null) {
       return result.userPoolTokensResult.value!.idToken.raw;
     }

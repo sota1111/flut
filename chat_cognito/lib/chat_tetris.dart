@@ -14,12 +14,12 @@ class ChatRoomTetris extends StatefulWidget {
 
 class ChatRoomState extends State<ChatRoomTetris> {
   final List<types.Message> _messages = [];
-  final _user = const types.User(id: '82091008-a484-4ad9-ae75-a22bf8e6f3ac');
+  late types.User _user;
   final types.User _tetris = const types.User(
     id: 'tetris',
-    firstName: "Tetris猫",
+    firstName: "Smino",
     lastName: "",
-    imageUrl: ImageUrls.tetrisFace0,
+    imageUrl: ImageUrls.tetrisSmino,
   );
   ApiService? _apiService;
 
@@ -30,13 +30,15 @@ class ChatRoomState extends State<ChatRoomTetris> {
       author: _tetris,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: randomString(),
-      text: "ルール把握してないけど、ヨシ！",
+      text: "ご用件はなんですか？",
     ));
 
     _apiService = ApiService();
     initializeAsyncMethods();
   }
   Future<void> initializeAsyncMethods() async {
+    String? identityId = _apiService?.getIdentityId;
+    _user = types.User(id: identityId ?? 'xxxxx-xxxxx-xxxxx');
     //await _apiService?.signOut();
     Map<String, dynamic>? apiResponseData = await _apiService?.performAuthorizedGet();
   }
@@ -44,7 +46,7 @@ class ChatRoomState extends State<ChatRoomTetris> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('tetris知らんけど、ヨシ！')),
+      appBar: AppBar(title: const Text('tetrisチャット')),
       body: Chat(
         user: _user,
         messages: _messages,
@@ -73,23 +75,18 @@ class ChatRoomState extends State<ChatRoomTetris> {
 
     Map<String, dynamic>? apiResponseData = await _apiService?.performAuthorizedPost(message.text);
 
-    Future.delayed(const Duration(seconds: 1), () {
-      final responseText = apiResponseData?['Response'] ?? 'Failed';
-      debugPrint(responseText);
+    final responseText = apiResponseData?['message'] ?? 'Failed';
+    debugPrint(responseText);
 
-      // Remove first newline character from the responseText
-      final sanitizedResponseText = responseText.replaceFirst('\n', '');
+    //final sanitizedResponseText = responseText.replaceFirst('\n', '');
+    //final finalResponseText = sanitizedResponseText + "\n\n多分、ヨシ！";
 
-      // Append "ヨシ！" to the responseText
-      final finalResponseText = sanitizedResponseText + "\n\n多分、ヨシ！";
-
-      final responseMessage = types.TextMessage(
-        author: _tetris,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: randomString(),
-        text: finalResponseText,
-      );
-      _addMessage(responseMessage);
-    });
+    final responseMessage = types.TextMessage(
+      author: _tetris,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: randomString(),
+      text: responseText,
+    );
+    _addMessage(responseMessage);
   }
 }
